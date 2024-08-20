@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Button and Container Example</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #e8f4fc;
+        }
+        .container {
+            width: 320px;
+            height: 160px;
+            background-color: lightblue;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            margin-top: 30px;
+            transition: background-color 0.3s, transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(45deg);
+            pointer-events: none;
+            transition: opacity 0.5s;
+        }
+        .container:hover::before {
+            opacity: 0.5;
+        }
+        .container p {
+            font-size: 22px;
+            font-weight: bold;
+            color: #fff;
+            margin: 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+        .button {
+            padding: 12px 24px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+        .button:hover {
+            background-color: #0056b3;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        .button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+    <button class="button" onclick="toggleState()">Click Me</button>
+    <div class="container" id="container">
+        <p id="text">Initial Text</p>
+    </div>
+
+    <script>
+        let isInitialState = true;
+
+        function toggleState() {
+            const button = document.querySelector('.button');
+            const text = document.getElementById('text');
+            const container = document.getElementById('container');
+
+            if (isInitialState) {
+                button.textContent = 'Reset';
+                text.textContent = 'Text Changed!';
+                container.style.backgroundColor = 'lightcoral';
+                container.style.transform = 'scale(1.05)';
+            } else {
+                button.textContent = 'Click Me';
+                text.textContent = 'Initial Text';
+                container.style.backgroundColor = 'lightgreen';
+                container.style.transform = 'scale(1)';
+            }
+
+            isInitialState = !isInitialState;
+        }
+    </script>
+
+</body>
+</html>
